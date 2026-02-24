@@ -242,6 +242,18 @@
             background: var(--cream);
             position: relative;
             overflow: hidden;
+            aspect-ratio: 1;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
         }
 
         /* --- Filtre de Catégorie --- */
@@ -531,6 +543,13 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            background: var(--cream);
+        }
+
+        .gallery-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .gallery-nav {
@@ -619,6 +638,18 @@
             max-width: 90%;
         }
         .toast.active { transform: translateY(0); opacity: 1; }
+
+        /* Style pour les images placeholder */
+        .placeholder-bg {
+            background: linear-gradient(135deg, var(--cream), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--fg);
+            font-size: 14px;
+            text-align: center;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
@@ -917,7 +948,7 @@
             </div>
             
             <div class="pt-8 text-center text-sm opacity-50 border-t border-white/10">
-                <p>2026 Ryma Art. Tous droits réservés.</p>
+                <p>2024 Ryma Art. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
@@ -942,10 +973,16 @@
     <script>
         // Initialisation EmailJS
         (function() {
-            emailjs.init("YOUR_PUBLIC_KEY");
+            emailjs.init("YOUR_PUBLIC_KEY"); // Remplacez par votre clé publique EmailJS
         })();
 
-        // Données des Produits avec prix en DZD
+        // Données des Produits avec support d'images locales
+        // === INSTRUCTIONS POUR AJOUTER VOS IMAGES ===
+        // 1. Créez un dossier "images" dans le même dossier que ce fichier HTML
+        // 2. Placez vos images dans ce dossier (format JPG, PNG recommandé)
+        // 3. Remplacez les chemins "images/nom-du-produit-X.jpg" par vos vrais noms de fichiers
+        // 4. Vous pouvez avoir 1 à 3 images par produit
+        
         const products = [
             {
                 id: 1,
@@ -955,11 +992,11 @@
                 description: "Un mélange apaisant de lavande française et de vanille, parfait pour la relaxation.",
                 scent: "Lavande & Vanille",
                 burnTime: "45 heures",
-                color: "#D4A5A5",
+                details: "Cire de soja naturelle, mèche en coton, verre recyclable",
                 images: [
-                    { type: 'svg', color: '#D4A5A5', category: 'candles' },
-                    { type: 'svg', color: '#E8B4B8', category: 'candles' },
-                    { type: 'svg', color: '#C4A484', category: 'candles' }
+                    { type: 'image', url: 'images/bougie-lavande-1.jpg', alt: 'Bougie Lavande - Vue principale' },
+                    { type: 'image', url: 'images/bougie-lavande-2.jpg', alt: 'Bougie Lavande - Vue détaillée' },
+                    { type: 'image', url: 'images/bougie-lavande-3.jpg', alt: 'Bougie Lavande - Packaging' }
                 ]
             },
             {
@@ -970,11 +1007,11 @@
                 description: "Une élégante sculpture de fleur de lotus, sculptée à la main en graphite premium.",
                 dimensions: "15 x 10 x 10 cm",
                 material: "Graphite Naturel",
-                color: "#8B7E74",
+                details: "Pièce unique, finition mate, socle inclus",
                 images: [
-                    { type: 'svg', color: '#8B7E74', category: 'graphite' },
-                    { type: 'svg', color: '#A67C52', category: 'graphite' },
-                    { type: 'svg', color: '#9CAF88', category: 'graphite' }
+                    { type: 'image', url: 'images/lotus-1.jpg', alt: 'Sculpture Lotus - Vue avant' },
+                    { type: 'image', url: 'images/lotus-2.jpg', alt: 'Sculpture Lotus - Vue latérale' },
+                    { type: 'image', url: 'images/lotus-3.jpg', alt: 'Sculpture Lotus - Détail' }
                 ]
             },
             {
@@ -985,11 +1022,11 @@
                 description: "Pétales de rose romantiques avec des notes de pivoine et de musc doux.",
                 scent: "Rose & Pivoine",
                 burnTime: "50 heures",
-                color: "#E8B4B8",
+                details: "Édition limitée, pot en céramique fait main",
                 images: [
-                    { type: 'svg', color: '#E8B4B8', category: 'candles' },
-                    { type: 'svg', color: '#D4A5A5', category: 'candles' },
-                    { type: 'svg', color: '#C4A484', category: 'candles' }
+                    { type: 'image', url: 'images/rose-1.jpg', alt: 'Bougie Rose - Vue principale' },
+                    { type: 'image', url: 'images/rose-2.jpg', alt: 'Bougie Rose - Ambiance' },
+                    { type: 'image', url: 'images/rose-3.jpg', alt: 'Bougie Rose - Détail' }
                 ]
             },
             {
@@ -1000,11 +1037,11 @@
                 description: "Design délicat de plume, parfait pour la décoration intérieure moderne.",
                 dimensions: "30 x 40 cm",
                 material: "Graphite sur Toile",
-                color: "#9CAF88",
+                details: "Encadrement bois naturel, prêt à accrocher",
                 images: [
-                    { type: 'svg', color: '#9CAF88', category: 'graphite' },
-                    { type: 'svg', color: '#8B7E74', category: 'graphite' },
-                    { type: 'svg', color: '#A67C52', category: 'graphite' }
+                    { type: 'image', url: 'images/plume-1.jpg', alt: 'Art mural Plume - Vue d\'ensemble' },
+                    { type: 'image', url: 'images/plume-2.jpg', alt: 'Art mural Plume - Détail texture' },
+                    { type: 'image', url: 'images/plume-3.jpg', alt: 'Art mural Plume - Encadrement' }
                 ]
             },
             {
@@ -1015,11 +1052,11 @@
                 description: "Gousse de vanille chaude avec de riches notes de bourbon.",
                 scent: "Vanille & Bourbon",
                 burnTime: "40 heures",
-                color: "#C4A484",
+                details: "Parfum intense, verre teinté noir",
                 images: [
-                    { type: 'svg', color: '#C4A484', category: 'candles' },
-                    { type: 'svg', color: '#A67C52', category: 'candles' },
-                    { type: 'svg', color: '#D4A5A5', category: 'candles' }
+                    { type: 'image', url: 'images/vanille-1.jpg', alt: 'Bougie Vanille - Vue principale' },
+                    { type: 'image', url: 'images/vanille-2.jpg', alt: 'Bougie Vanille - Packaging' },
+                    { type: 'image', url: 'images/vanille-3.jpg', alt: 'Bougie Vanille - Allumée' }
                 ]
             },
             {
@@ -1030,11 +1067,11 @@
                 description: "Set de 3 sculptures géométriques minimalistes pour étagère ou bureau.",
                 dimensions: "8 - 13 cm",
                 material: "Graphite Naturel",
-                color: "#A67C52",
+                details: "Formes variées, finition polie",
                 images: [
-                    { type: 'svg', color: '#A67C52', category: 'graphite' },
-                    { type: 'svg', color: '#8B7E74', category: 'graphite' },
-                    { type: 'svg', color: '#9CAF88', category: 'graphite' }
+                    { type: 'image', url: 'images/geo-1.jpg', alt: 'Set géométrique - Ensemble' },
+                    { type: 'image', url: 'images/geo-2.jpg', alt: 'Set géométrique - Détail' },
+                    { type: 'image', url: 'images/geo-3.jpg', alt: 'Set géométrique - Disposition' }
                 ]
             },
             {
@@ -1045,11 +1082,11 @@
                 description: "Sel marin frais et bois flotté pour une atmosphère côtière.",
                 scent: "Sel Marin & Bois Flotté",
                 burnTime: "45 heures",
-                color: "#9CAF88",
+                details: "Verre bleu dégradé, mèche en bois",
                 images: [
-                    { type: 'svg', color: '#9CAF88', category: 'candles' },
-                    { type: 'svg', color: '#C4A484', category: 'candles' },
-                    { type: 'svg', color: '#D4A5A5', category: 'candles' }
+                    { type: 'image', url: 'images/ocean-1.jpg', alt: 'Bougie Océane - Vue principale' },
+                    { type: 'image', url: 'images/ocean-2.jpg', alt: 'Bougie Océane - Ambiance' },
+                    { type: 'image', url: 'images/ocean-3.jpg', alt: 'Bougie Océane - Détail' }
                 ]
             },
             {
@@ -1060,11 +1097,11 @@
                 description: "Élégant mobile des phases lunaires, fabriqué à la main avec attention aux détails.",
                 dimensions: "18 cm",
                 material: "Graphite & Laiton",
-                color: "#D4A5A5",
+                details: "Mobile équilibré, fils invisibles",
                 images: [
-                    { type: 'svg', color: '#D4A5A5', category: 'graphite' },
-                    { type: 'svg', color: '#9CAF88', category: 'graphite' },
-                    { type: 'svg', color: '#8B7E74', category: 'graphite' }
+                    { type: 'image', url: 'images/lune-1.jpg', alt: 'Mobile lunaire - Vue d\'ensemble' },
+                    { type: 'image', url: 'images/lune-2.jpg', alt: 'Mobile lunaire - Détail phases' },
+                    { type: 'image', url: 'images/lune-3.jpg', alt: 'Mobile lunaire - Mouvement' }
                 ]
             },
             {
@@ -1075,11 +1112,11 @@
                 description: "Cannelle douce avec des notes de clou de girofle et de zeste d'orange.",
                 scent: "Cannelle & Épices",
                 burnTime: "40 heures",
-                color: "#A67C52",
+                details: "Ambiance chaleureuse, pot en terre cuite",
                 images: [
-                    { type: 'svg', color: '#A67C52', category: 'candles' },
-                    { type: 'svg', color: '#C4A484', category: 'candles' },
-                    { type: 'svg', color: '#D4A5A5', category: 'candles' }
+                    { type: 'image', url: 'images/cannelle-1.jpg', alt: 'Bougie Cannelle - Vue principale' },
+                    { type: 'image', url: 'images/cannelle-2.jpg', alt: 'Bougie Cannelle - Texture' },
+                    { type: 'image', url: 'images/cannelle-3.jpg', alt: 'Bougie Cannelle - Ambiance' }
                 ]
             }
         ];
@@ -1106,17 +1143,77 @@
             return price.toLocaleString('fr-DZ') + ' DA';
         }
 
+        // Fonction pour afficher l'icône ou l'image du produit
+        function getProductIcon(product) {
+            // Vérifier si le produit a des images
+            if (product.images && product.images[0] && product.images[0].type === 'image') {
+                // Essayer de charger la première image
+                return `<img src="${product.images[0].url}" alt="${product.name}" 
+                         onerror="this.onerror=null; this.parentElement.innerHTML='${getFallbackSVG(product)}'">`;
+            } else {
+                return getFallbackSVG(product);
+            }
+        }
+
+        // Fonction de secours avec SVG si l'image ne charge pas
+        function getFallbackSVG(product) {
+            if (product.category === 'candles') {
+                return `
+                    <svg viewBox="0 0 60 80" class="w-12 h-16 relative z-10" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));">
+                        <rect x="15" y="25" width="30" height="40" rx="2" fill="#F5EDE6" stroke="#E8DED4"/>
+                        <rect x="17" y="27" width="26" height="36" rx="1" fill="#FFFFFF"/>
+                        <path d="M30 25 L30 15" stroke="#C4A484" stroke-width="2"/>
+                        <ellipse cx="30" cy="12" rx="4" ry="6" fill="${product.color || '#D4A5A5'}" opacity="0.8"/>
+                    </svg>
+                `;
+            }
+            return `
+                <svg viewBox="0 0 60 60" class="w-12 h-12 relative z-10" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));">
+                    <polygon points="30,5 55,50 5,50" fill="none" stroke="${product.color || '#8B7E74'}" stroke-width="1.5"/>
+                    <polygon points="30,15 45,45 15,45" fill="#F5EDE6" stroke="#E8DED4"/>
+                </svg>
+            `;
+        }
+
+        // Fonction pour afficher l'image dans la galerie
+        function getGalleryIcon(image, index) {
+            if (image.type === 'image') {
+                return `<img src="${image.url}" alt="${image.alt || 'Image produit'}" 
+                         onerror="this.onerror=null; this.parentElement.innerHTML='${getFallbackGallerySVG(image)}'">`;
+            } else {
+                return getFallbackGallerySVG(image);
+            }
+        }
+
+        // Fonction de secours pour la galerie
+        function getFallbackGallerySVG(image) {
+            if (image.category === 'candles') {
+                return `
+                    <svg viewBox="0 0 60 80" class="w-24 h-32">
+                        <rect x="15" y="25" width="30" height="40" rx="2" fill="#F5EDE6" stroke="#E8DED4"/>
+                        <rect x="17" y="27" width="26" height="36" rx="1" fill="#FFFFFF"/>
+                        <path d="M30 25 L30 15" stroke="#C4A484" stroke-width="2"/>
+                        <ellipse cx="30" cy="12" rx="4" ry="6" fill="${image.color || '#D4A5A5'}" opacity="0.8"/>
+                    </svg>
+                `;
+            }
+            return `
+                <svg viewBox="0 0 60 60" class="w-24 h-24">
+                    <polygon points="30,5 55,50 5,50" fill="none" stroke="${image.color || '#8B7E74'}" stroke-width="1.5"/>
+                    <polygon points="30,15 45,45 15,45" fill="#F5EDE6" stroke="#E8DED4"/>
+                </svg>
+            `;
+        }
+
         // Rendu des Produits
         function renderProducts(filter = 'all') {
             const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
             
             productsGrid.innerHTML = filtered.map((product, index) => `
                 <article class="product-card reveal" data-category="${product.category}" style="animation-delay: ${index * 0.1}s">
-                    <div class="product-image aspect-square flex items-center justify-center p-8">
-                        <div class="w-3/4 h-3/4 relative flex items-center justify-center">
-                             <div class="absolute inset-0 rounded-full opacity-20" style="background: ${product.color};"></div>
-                             <div class="absolute inset-6 rounded-full bg-white shadow-sm"></div>
-                             ${getProductIcon(product.category, product.color)}
+                    <div class="product-image flex items-center justify-center p-4 bg-[var(--cream)]">
+                        <div class="w-full h-full relative flex items-center justify-center">
+                             ${getProductIcon(product)}
                         </div>
                     </div>
                     <div class="p-6">
@@ -1140,44 +1237,6 @@
             `).join('');
             
             initRevealAnimations();
-        }
-
-        function getProductIcon(category, color) {
-            if (category === 'candles') {
-                return `
-                    <svg viewBox="0 0 60 80" class="w-12 h-16 relative z-10" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));">
-                        <rect x="15" y="25" width="30" height="40" rx="2" fill="#F5EDE6" stroke="#E8DED4"/>
-                        <rect x="17" y="27" width="26" height="36" rx="1" fill="#FFFFFF"/>
-                        <path d="M30 25 L30 15" stroke="#C4A484" stroke-width="2"/>
-                        <ellipse cx="30" cy="12" rx="4" ry="6" fill="${color}" opacity="0.8"/>
-                    </svg>
-                `;
-            }
-            return `
-                <svg viewBox="0 0 60 60" class="w-12 h-12 relative z-10" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));">
-                    <polygon points="30,5 55,50 5,50" fill="none" stroke="${color}" stroke-width="1.5"/>
-                    <polygon points="30,15 45,45 15,45" fill="#F5EDE6" stroke="#E8DED4"/>
-                </svg>
-            `;
-        }
-
-        function getGalleryIcon(image, index) {
-            if (image.category === 'candles') {
-                return `
-                    <svg viewBox="0 0 60 80" class="w-24 h-32">
-                        <rect x="15" y="25" width="30" height="40" rx="2" fill="#F5EDE6" stroke="#E8DED4"/>
-                        <rect x="17" y="27" width="26" height="36" rx="1" fill="#FFFFFF"/>
-                        <path d="M30 25 L30 15" stroke="#C4A484" stroke-width="2"/>
-                        <ellipse cx="30" cy="12" rx="4" ry="6" fill="${image.color}" opacity="0.8"/>
-                    </svg>
-                `;
-            }
-            return `
-                <svg viewBox="0 0 60 60" class="w-24 h-24">
-                    <polygon points="30,5 55,50 5,50" fill="none" stroke="${image.color}" stroke-width="1.5"/>
-                    <polygon points="30,15 45,45 15,45" fill="#F5EDE6" stroke="#E8DED4"/>
-                </svg>
-            `;
         }
 
         // Ouvrir la Modale
@@ -1248,6 +1307,7 @@
                         ${product.burnTime ? `<div class="flex justify-between"><span style="color: var(--muted);">Durée de combustion</span><span>${product.burnTime}</span></div>` : ''}
                         ${product.dimensions ? `<div class="flex justify-between"><span style="color: var(--muted);">Dimensions</span><span>${product.dimensions}</span></div>` : ''}
                         ${product.material ? `<div class="flex justify-between"><span style="color: var(--muted);">Matériau</span><span>${product.material}</span></div>` : ''}
+                        ${product.details ? `<div class="flex justify-between"><span style="color: var(--muted);">Détails</span><span>${product.details}</span></div>` : ''}
                     </div>
                     
                     <div class="flex items-center justify-between mb-6">
@@ -1332,8 +1392,8 @@
                 
                 try {
                     await emailjs.send(
-                        'YOUR_SERVICE_ID',
-                        'YOUR_TEMPLATE_ID',
+                        'YOUR_SERVICE_ID', // Remplacez par votre Service ID EmailJS
+                        'YOUR_TEMPLATE_ID', // Remplacez par votre Template ID EmailJS
                         templateParams
                     );
                     
@@ -1428,4 +1488,3 @@
     </script>
 </body>
 </html>
-

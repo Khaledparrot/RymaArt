@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ryma Candles | Handcrafted Candles & Graphite Decor</title>
+    <title>Ryma Art | Bougies Artisanales & Décor Graphite</title>
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- EmailJS SDK -->
@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
-        /* --- CSS Variables for Theme --- */
+        /* --- Variables CSS pour le thème --- */
         :root {
             --bg: #FDF8F4;
             --fg: #3D3632;
@@ -97,7 +97,7 @@
         .delay-400 { animation-delay: 0.4s; }
         .delay-500 { animation-delay: 0.5s; }
 
-        /* --- Hero Background Elements --- */
+        /* --- Éléments d'arrière-plan Hero --- */
         .hero-bg {
             background: linear-gradient(135deg, var(--cream) 0%, var(--bg) 50%, #F9F3ED 100%);
             position: relative;
@@ -138,7 +138,7 @@
             width: 100%;
         }
 
-        /* --- Buttons --- */
+        /* --- Boutons --- */
         .btn-primary {
             background: var(--accent);
             color: white;
@@ -208,7 +208,7 @@
             transform: translateY(-2px);
         }
 
-        /* --- Product Cards --- */
+        /* --- Cartes Produits --- */
         .product-card {
             background: var(--card);
             border: 1px solid var(--border);
@@ -244,7 +244,7 @@
             overflow: hidden;
         }
 
-        /* --- Category Filter --- */
+        /* --- Filtre de Catégorie --- */
         .filter-btn {
             background: transparent;
             border: none;
@@ -279,7 +279,7 @@
             width: 30px;
         }
 
-        /* --- Forms --- */
+        /* --- Formulaires --- */
         .form-input {
             width: 100%;
             padding: 16px 20px;
@@ -297,7 +297,7 @@
             box-shadow: 0 0 0 3px rgba(196, 164, 132, 0.1);
         }
 
-        /* --- Reveal on Scroll --- */
+        /* --- Apparition au défilement --- */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -309,7 +309,7 @@
             transform: translateY(0);
         }
 
-        /* --- Mobile Menu --- */
+        /* --- Menu Mobile --- */
         .mobile-menu {
             position: fixed;
             top: 0;
@@ -431,7 +431,7 @@
             .desktop-nav { display: none; }
         }
 
-        /* --- Modal --- */
+        /* --- Modale --- */
         .modal {
             position: fixed;
             top: 0;
@@ -471,7 +471,7 @@
             transform: scale(1); 
         }
 
-        /* Close button for modal - Always visible */
+        /* Bouton de fermeture pour la modale - Toujours visible */
         .modal-close {
             position: sticky;
             top: 20px;
@@ -508,7 +508,7 @@
             transition: stroke 0.3s ease;
         }
 
-        /* Image Gallery */
+        /* Galerie d'images */
         .gallery-container {
             position: relative;
             width: 100%;
@@ -599,7 +599,7 @@
             border-color: var(--accent);
         }
 
-        /* Modal content area with padding */
+        /* Zone de contenu de la modale avec padding */
         .modal-body {
             padding: 0 24px 24px 24px;
         }
@@ -627,18 +627,18 @@
     <header class="fixed top-0 left-0 right-0 z-50 bg-[var(--bg)]/90 backdrop-blur-md">
         <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <a href="#" class="font-['Cormorant_Garamond'] text-2xl md:text-3xl font-light tracking-wider" style="color: var(--fg);">
-                Ryma Candles
+                Ryma Art
             </a>
             
-            <!-- Desktop Navigation - Hidden on mobile -->
+            <!-- Navigation Desktop - Masquée sur mobile -->
             <div class="desktop-nav hidden md:flex items-center gap-8">
-                <a href="#products" class="nav-link text-sm uppercase tracking-widest">Shop</a>
-                <a href="#about" class="nav-link text-sm uppercase tracking-widest">About</a>
+                <a href="#products" class="nav-link text-sm uppercase tracking-widest">Boutique</a>
+                <a href="#about" class="nav-link text-sm uppercase tracking-widest">À Propos</a>
                 <a href="#contact" class="nav-link text-sm uppercase tracking-widest">Contact</a>
             </div>
 
-            <!-- Hamburger Menu - Visible on mobile only -->
-            <button class="hamburger md:hidden" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <!-- Menu Hamburger - Visible uniquement sur mobile -->
+            <button class="hamburger md:hidden" id="hamburger" aria-label="Ouvrir le menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -646,23 +646,23 @@
         </nav>
     </header>
 
-    <!-- Mobile Menu -->
+    <!-- Menu Mobile -->
     <div class="mobile-overlay" id="mobileOverlay"></div>
     <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
-        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
+        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Fermer le menu">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="18" y1="6" x2="6" y2="18"/>
                 <line x1="6" y1="6" x2="18" y2="18"/>
             </svg>
         </button>
         <nav class="mobile-nav">
-            <a href="#products">Shop</a>
-            <a href="#about">About</a>
+            <a href="#products">Boutique</a>
+            <a href="#about">À Propos</a>
             <a href="#contact">Contact</a>
         </nav>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Section Hero -->
     <section class="hero-bg min-h-screen flex items-center relative overflow-hidden">
         <div class="orb" style="width: 400px; height: 400px; background: var(--accent); top: 10%; right: 10%;"></div>
         <div class="orb" style="width: 300px; height: 300px; background: var(--rose); bottom: 10%; left: 5%; animation-delay: -2s;"></div>
@@ -672,18 +672,18 @@
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="text-center lg:text-left">
                     <p class="animate-fade-up text-sm uppercase tracking-[0.3em] mb-6" style="color: var(--muted);">
-                        Handcrafted with Love
+                        Fabriqué avec Amour
                     </p>
                     <h1 class="animate-fade-up delay-100 text-5xl md:text-6xl lg:text-7xl font-light leading-tight mb-6" style="color: var(--fg);">
-                        Ryma Candles<br>
-                        <span class="italic" style="color: var(--accent);">& Graphite Art</span>
+                        Ryma Art<br>
+                        <span class="italic" style="color: var(--accent);">& Créations Graphite</span>
                     </h1>
                     <p class="animate-fade-up delay-200 text-lg mb-10 max-w-md mx-auto lg:mx-0" style="color: var(--muted);">
-                        Discover our collection of meticulously handcrafted candles and unique graphite decorations, designed to bring warmth and elegance to your home.
+                        Découvrez notre collection de bougies artisanales et décorations en graphite, conçues pour apporter chaleur et élégance à votre intérieur.
                     </p>
                     <div class="animate-fade-up delay-300 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="#products" class="btn-primary">Explore Collection</a>
-                        <a href="#contact" class="btn-secondary">Contact Us</a>
+                        <a href="#products" class="btn-primary">Découvrir la Collection</a>
+                        <a href="#contact" class="btn-secondary">Nous Contacter</a>
                     </div>
                 </div>
                 
@@ -708,8 +708,8 @@
         </div>
 
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-fade-in delay-500">
-            <a href="#products" class="flex flex-col items-center gap-2" style="color: var(--muted);" aria-label="Scroll down">
-                <span class="text-xs uppercase tracking-widest">Scroll</span>
+            <a href="#products" class="flex flex-col items-center gap-2" style="color: var(--muted);" aria-label="Défiler vers le bas">
+                <span class="text-xs uppercase tracking-widest">Défiler</span>
                 <svg width="20" height="30" viewBox="0 0 20 30" fill="none" stroke="currentColor" stroke-width="1.5">
                     <rect x="1" y="1" width="18" height="28" rx="9"/>
                     <circle cx="10" cy="10" r="2" fill="currentColor">
@@ -720,52 +720,52 @@
         </div>
     </section>
 
-    <!-- Products Section -->
+    <!-- Section Produits -->
     <section id="products" class="py-24 relative bg-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
-                <p class="text-sm uppercase tracking-[0.3em] mb-4" style="color: var(--accent);">Our Collection</p>
-                <h2 class="text-4xl md:text-5xl font-light mb-6">Handcrafted Products</h2>
+                <p class="text-sm uppercase tracking-[0.3em] mb-4" style="color: var(--accent);">Notre Collection</p>
+                <h2 class="text-4xl md:text-5xl font-light mb-6">Créations Artisanales</h2>
                 <p class="max-w-xl mx-auto" style="color: var(--muted);">
-                    Each piece is thoughtfully created using premium materials, ensuring beauty and quality in every detail.
+                    Chaque pièce est soigneusement conçue avec des matériaux premium, garantissant beauté et qualité dans chaque détail.
                 </p>
             </div>
 
             <div class="flex justify-center gap-2 md:gap-4 mb-12 flex-wrap reveal" role="tablist">
-                <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Products</button>
-                <button class="filter-btn" data-filter="candles" role="tab" aria-selected="false">Candles</button>
-                <button class="filter-btn" data-filter="graphite" role="tab" aria-selected="false">Graphite Decor</button>
+                <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">Tous les Produits</button>
+                <button class="filter-btn" data-filter="candles" role="tab" aria-selected="false">Bougies</button>
+                <button class="filter-btn" data-filter="graphite" role="tab" aria-selected="false">Décor Graphite</button>
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="productsGrid"></div>
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- Section À Propos -->
     <section id="about" class="py-24 relative overflow-hidden bg-[var(--cream)]">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="reveal order-2 lg:order-1">
-                    <p class="text-sm uppercase tracking-[0.3em] mb-4" style="color: var(--accent);">Our Story</p>
-                    <h2 class="text-4xl md:text-5xl font-light mb-8">Crafted with Passion</h2>
+                    <p class="text-sm uppercase tracking-[0.3em] mb-4" style="color: var(--accent);">Notre Histoire</p>
+                    <h2 class="text-4xl md:text-5xl font-light mb-8">Créé avec Passion</h2>
                     <div class="space-y-6" style="color: var(--muted);">
-                        <p>Ryma Candles began as a small passion project in my home studio, where I discovered the art of transforming simple materials into pieces that bring joy and warmth to everyday spaces.</p>
-                        <p>Each candle is hand-poured using eco-friendly soy wax and premium fragrance oils, while our graphite decorations are carefully sculpted to capture light and shadow in unique ways.</p>
-                        <p>We believe that beautiful, handcrafted items should be accessible to everyone who appreciates the artistry and care that goes into making them.</p>
+                        <p>Ryma Art a commencé comme un petit projet passionné dans mon atelier à la maison, où j'ai découvert l'art de transformer des matériaux simples en pièces qui apportent joie et chaleur aux espaces du quotidien.</p>
+                        <p>Chaque bougie est coulée à la main en utilisant de la cire de soja écologique et des huiles parfumées premium, tandis que nos décorations en graphite sont soigneusement sculptées pour capturer la lumière et l'ombre de manière unique.</p>
+                        <p>Nous croyons que de beaux objets artisanaux devraient être accessibles à tous ceux qui apprécient l'artisanat et le soin apporté à leur création.</p>
                     </div>
                     
                     <div class="grid grid-cols-3 gap-8 mt-12 pt-8 border-t border-[var(--border)]">
                         <div class="text-center">
                             <p class="text-3xl font-light" style="color: var(--accent);">100+</p>
-                            <p class="text-sm uppercase tracking-wider mt-2" style="color: var(--muted);">Products</p>
+                            <p class="text-sm uppercase tracking-wider mt-2" style="color: var(--muted);">Produits</p>
                         </div>
                         <div class="text-center">
                             <p class="text-3xl font-light" style="color: var(--accent);">500+</p>
-                            <p class="text-sm uppercase tracking-wider mt-2" style="color: var(--muted);">Happy Clients</p>
+                            <p class="text-sm uppercase tracking-wider mt-2" style="color: var(--muted);">Clients Satisfaits</p>
                         </div>
                         <div class="text-center">
                             <p class="text-3xl font-light" style="color: var(--accent);">3+</p>
-                            <p class="text-sm uppercase tracking-wider mt-2" style="color: var(--muted);">Years</p>
+                            <p class="text-sm uppercase tracking-wider mt-2" style="color: var(--muted);">Années</p>
                         </div>
                     </div>
                 </div>
@@ -790,14 +790,14 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Section Contact -->
     <section id="contact" class="py-24 bg-[var(--bg)]">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal">
-                <p class="text-sm uppercase tracking-[0.3em] mb-4" style="color: var(--accent);">Get in Touch</p>
-                <h2 class="text-4xl md:text-5xl font-light mb-6">Contact Us</h2>
+                <p class="text-sm uppercase tracking-[0.3em] mb-4" style="color: var(--accent);">Prenez Contact</p>
+                <h2 class="text-4xl md:text-5xl font-light mb-6">Contactez-Nous</h2>
                 <p class="max-w-xl mx-auto" style="color: var(--muted);">
-                    We'd love to hear from you. Place an order or ask us anything about our products.
+                    Nous serions ravis de vous entendre. Passez une commande ou posez-nous des questions sur nos produits.
                 </p>
             </div>
 
@@ -808,9 +808,9 @@
                             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-light mb-2">Call Us</h3>
-                    <p class="text-sm mb-4" style="color: var(--muted);">Speak directly with us</p>
-                    <a href="tel:+1234567890" class="text-lg font-medium" style="color: var(--accent);">+1 (234) 567-890</a>
+                    <h3 class="text-xl font-light mb-2">Appelez-Nous</h3>
+                    <p class="text-sm mb-4" style="color: var(--muted);">Parlez directement avec nous</p>
+                    <a href="tel:+213123456789" class="text-lg font-medium" style="color: var(--accent);">+213 123 456 789</a>
                 </div>
 
                 <div class="bg-white border border-[var(--border)] p-8 text-center hover:border-[var(--accent)] transition-colors">
@@ -820,9 +820,9 @@
                             <polyline points="22,6 12,13 2,6"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-light mb-2">Email Us</h3>
-                    <p class="text-sm mb-4" style="color: var(--muted);">We respond within 24h</p>
-                    <a href="mailto:contact@rymacandles.com" class="text-lg font-medium" style="color: var(--accent);">contact@rymacandles.com</a>
+                    <h3 class="text-xl font-light mb-2">Envoyez-nous un Email</h3>
+                    <p class="text-sm mb-4" style="color: var(--muted);">Nous répondons sous 24h</p>
+                    <a href="mailto:contact@rymaart.com" class="text-lg font-medium" style="color: var(--accent);">contact@rymaart.com</a>
                 </div>
 
                 <div class="bg-white border border-[var(--border)] p-8 text-center hover:border-[var(--accent)] transition-colors">
@@ -832,45 +832,45 @@
                             <polyline points="12 6 12 12 16 14"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-light mb-2">Business Hours</h3>
-                    <p class="text-sm mb-4" style="color: var(--muted);">Available for calls</p>
-                    <p class="text-lg font-medium" style="color: var(--fg);">Mon - Sat: 9AM - 6PM</p>
+                    <h3 class="text-xl font-light mb-2">Horaires d'Ouverture</h3>
+                    <p class="text-sm mb-4" style="color: var(--muted);">Disponibles par téléphone</p>
+                    <p class="text-lg font-medium" style="color: var(--fg);">Lun - Sam : 9h - 18h</p>
                 </div>
             </div>
 
             <div class="max-w-2xl mx-auto reveal">
                 <div class="p-8 md:p-12 bg-white border border-[var(--border)]">
-                    <h3 class="text-2xl font-light mb-8 text-center">Send us a Message</h3>
+                    <h3 class="text-2xl font-light mb-8 text-center">Envoyez-nous un Message</h3>
                     <form id="contactForm" class="space-y-6">
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
-                                <label for="name" class="block text-sm uppercase tracking-wider mb-2" style="color: var(--muted);">Your Name</label>
-                                <input type="text" id="name" name="name" required class="form-input" placeholder="Jane Doe">
+                                <label for="name" class="block text-sm uppercase tracking-wider mb-2" style="color: var(--muted);">Votre Nom</label>
+                                <input type="text" id="name" name="name" required class="form-input" placeholder="Jean Dupont">
                             </div>
                             <div>
-                                <label for="email" class="block text-sm uppercase tracking-wider mb-2" style="color: var(--muted);">Email Address</label>
-                                <input type="email" id="email" name="email" required class="form-input" placeholder="jane@example.com">
+                                <label for="email" class="block text-sm uppercase tracking-wider mb-2" style="color: var(--muted);">Adresse Email</label>
+                                <input type="email" id="email" name="email" required class="form-input" placeholder="jean@exemple.com">
                             </div>
                         </div>
                         <div>
-                            <label for="phone" class="block text-sm uppercase tracking-wider mb-2" style="color: var(--muted);">Phone Number (Optional)</label>
-                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="+1 (234) 567-890">
+                            <label for="phone" class="block text-sm uppercase tracking-wider mb-2" style="color: var(--muted);">Téléphone (Optionnel)</label>
+                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="+213 123 456 789">
                         </div>
                         <div>
-                            <label for="subject" class="block text-sm uppercase tracking-wider mb-2" style="color: var(--muted);">Subject</label>
+                            <label for="subject" class="block text-sm uppercase tracking-wider mb-2" style="color: var(--muted);">Sujet</label>
                             <select id="subject" name="subject" required class="form-input">
-                                <option value="">Select a subject</option>
-                                <option value="order">Place an Order</option>
-                                <option value="custom">Custom Request</option>
-                                <option value="question">Product Question</option>
-                                <option value="other">Other</option>
+                                <option value="">Sélectionnez un sujet</option>
+                                <option value="order">Passer une Commande</option>
+                                <option value="custom">Demande Personnalisée</option>
+                                <option value="question">Question sur un Produit</option>
+                                <option value="other">Autre</option>
                             </select>
                         </div>
                         <div>
-                            <label for="message" class="block text-sm uppercase tracking-wider mb-2" style="color: var(--muted);">Your Message</label>
-                            <textarea id="message" name="message" required class="form-input" rows="5" placeholder="Tell us about your order or question..."></textarea>
+                            <label for="message" class="block text-sm uppercase tracking-wider mb-2" style="color: var(--muted);">Votre Message</label>
+                            <textarea id="message" name="message" required class="form-input" rows="5" placeholder="Parlez-nous de votre commande ou de votre question..."></textarea>
                         </div>
-                        <button type="submit" id="submitBtn" class="btn-primary w-full">Send Message</button>
+                        <button type="submit" id="submitBtn" class="btn-primary w-full">Envoyer le Message</button>
                     </form>
                 </div>
             </div>
@@ -882,23 +882,23 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-4 gap-12 mb-12">
                 <div class="md:col-span-2">
-                    <h3 class="text-2xl font-light mb-4" style="font-family: 'Cormorant Garamond', serif;">Ryma Candles</h3>
+                    <h3 class="text-2xl font-light mb-4" style="font-family: 'Cormorant Garamond', serif;">Ryma Art</h3>
                     <p class="mb-6 opacity-70 max-w-md">
-                        Handcrafted candles and graphite decorations, made with love and care for your beautiful home.
+                        Bougies artisanales et décorations en graphite, fabriquées avec amour et soin pour votre intérieur.
                     </p>
                 </div>
                 
                 <div>
-                    <h4 class="text-sm uppercase tracking-wider mb-4">Quick Links</h4>
+                    <h4 class="text-sm uppercase tracking-wider mb-4">Liens Rapides</h4>
                     <nav class="flex flex-col gap-3">
-                        <a href="#products" class="opacity-70 hover:opacity-100 transition-opacity">Products</a>
-                        <a href="#about" class="opacity-70 hover:opacity-100 transition-opacity">About Us</a>
+                        <a href="#products" class="opacity-70 hover:opacity-100 transition-opacity">Produits</a>
+                        <a href="#about" class="opacity-70 hover:opacity-100 transition-opacity">À Propos</a>
                         <a href="#contact" class="opacity-70 hover:opacity-100 transition-opacity">Contact</a>
                     </nav>
                 </div>
                 
                 <div>
-                    <h4 class="text-sm uppercase tracking-wider mb-4">Connect</h4>
+                    <h4 class="text-sm uppercase tracking-wider mb-4">Réseaux</h4>
                     <div class="flex gap-4">
                         <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 transition-colors" aria-label="Instagram">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -917,16 +917,16 @@
             </div>
             
             <div class="pt-8 text-center text-sm opacity-50 border-t border-white/10">
-                <p>2024 Ryma Candles. All rights reserved.</p>
+                <p>2024 Ryma Art. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Product Modal - Fixed with visible X button -->
+    <!-- Modale Produit - Fixe avec bouton X visible -->
     <div class="modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
-            <!-- X Close Button - Always visible -->
-            <button class="modal-close" id="closeModal" aria-label="Close modal">
+            <!-- Bouton X de fermeture - Toujours visible -->
+            <button class="modal-close" id="closeModal" aria-label="Fermer la modale">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <line x1="18" y1="6" x2="6" y2="18"/>
                     <line x1="6" y1="6" x2="18" y2="18"/>
@@ -936,25 +936,25 @@
         </div>
     </div>
 
-    <!-- Toast Notification -->
+    <!-- Notification Toast -->
     <div class="toast" id="toast" role="alert" aria-live="polite"></div>
 
     <script>
-        // Initialize EmailJS
+        // Initialisation EmailJS
         (function() {
             emailjs.init("YOUR_PUBLIC_KEY");
         })();
 
-        // Product Data
+        // Données des Produits avec prix en DZD
         const products = [
             {
                 id: 1,
-                name: "Lavender Dreams Candle",
-                price: 28,
+                name: "Bougie Rêves de Lavande",
+                price: 4200, // DZD
                 category: "candles",
-                description: "A soothing blend of French lavender and vanilla, perfect for relaxation.",
-                scent: "Lavender & Vanilla",
-                burnTime: "45 hours",
+                description: "Un mélange apaisant de lavande française et de vanille, parfait pour la relaxation.",
+                scent: "Lavande & Vanille",
+                burnTime: "45 heures",
                 color: "#D4A5A5",
                 images: [
                     { type: 'svg', color: '#D4A5A5', category: 'candles' },
@@ -964,12 +964,12 @@
             },
             {
                 id: 2,
-                name: "Graphite Lotus Sculpture",
-                price: 65,
+                name: "Sculpture Lotus en Graphite",
+                price: 9750, // DZD
                 category: "graphite",
-                description: "An elegant lotus flower sculpture, hand-carved from premium graphite.",
-                dimensions: "6 x 4 x 4",
-                material: "Natural Graphite",
+                description: "Une élégante sculpture de fleur de lotus, sculptée à la main en graphite premium.",
+                dimensions: "15 x 10 x 10 cm",
+                material: "Graphite Naturel",
                 color: "#8B7E74",
                 images: [
                     { type: 'svg', color: '#8B7E74', category: 'graphite' },
@@ -979,12 +979,12 @@
             },
             {
                 id: 3,
-                name: "Rose Garden Candle",
-                price: 32,
+                name: "Bougie Jardin de Roses",
+                price: 4800, // DZD
                 category: "candles",
-                description: "Romantic rose petals with hints of peony and soft musk.",
-                scent: "Rose & Peony",
-                burnTime: "50 hours",
+                description: "Pétales de rose romantiques avec des notes de pivoine et de musc doux.",
+                scent: "Rose & Pivoine",
+                burnTime: "50 heures",
                 color: "#E8B4B8",
                 images: [
                     { type: 'svg', color: '#E8B4B8', category: 'candles' },
@@ -994,12 +994,12 @@
             },
             {
                 id: 4,
-                name: "Graphite Feather Wall Art",
-                price: 85,
+                name: "Art Mural Plume en Graphite",
+                price: 12750, // DZD
                 category: "graphite",
-                description: "Delicate feather design, perfect for modern home decor.",
-                dimensions: "12 x 16",
-                material: "Graphite on Canvas",
+                description: "Design délicat de plume, parfait pour la décoration intérieure moderne.",
+                dimensions: "30 x 40 cm",
+                material: "Graphite sur Toile",
                 color: "#9CAF88",
                 images: [
                     { type: 'svg', color: '#9CAF88', category: 'graphite' },
@@ -1009,12 +1009,12 @@
             },
             {
                 id: 5,
-                name: "Vanilla Bourbon Candle",
-                price: 30,
+                name: "Bougie Vanille Bourbon",
+                price: 4500, // DZD
                 category: "candles",
-                description: "Warm vanilla bean with rich bourbon undertones.",
-                scent: "Vanilla & Bourbon",
-                burnTime: "40 hours",
+                description: "Gousse de vanille chaude avec de riches notes de bourbon.",
+                scent: "Vanille & Bourbon",
+                burnTime: "40 heures",
                 color: "#C4A484",
                 images: [
                     { type: 'svg', color: '#C4A484', category: 'candles' },
@@ -1024,12 +1024,12 @@
             },
             {
                 id: 6,
-                name: "Graphite Geometric Set",
-                price: 95,
+                name: "Set Géométrique Graphite",
+                price: 14250, // DZD
                 category: "graphite",
-                description: "Set of 3 minimalist geometric sculptures for shelf or desk display.",
-                dimensions: "3 - 5 tall",
-                material: "Natural Graphite",
+                description: "Set de 3 sculptures géométriques minimalistes pour étagère ou bureau.",
+                dimensions: "8 - 13 cm",
+                material: "Graphite Naturel",
                 color: "#A67C52",
                 images: [
                     { type: 'svg', color: '#A67C52', category: 'graphite' },
@@ -1039,12 +1039,12 @@
             },
             {
                 id: 7,
-                name: "Ocean Breeze Candle",
-                price: 26,
+                name: "Bougie Brise Océane",
+                price: 3900, // DZD
                 category: "candles",
-                description: "Fresh sea salt and driftwood for a coastal atmosphere.",
-                scent: "Sea Salt & Driftwood",
-                burnTime: "45 hours",
+                description: "Sel marin frais et bois flotté pour une atmosphère côtière.",
+                scent: "Sel Marin & Bois Flotté",
+                burnTime: "45 heures",
                 color: "#9CAF88",
                 images: [
                     { type: 'svg', color: '#9CAF88', category: 'candles' },
@@ -1054,12 +1054,12 @@
             },
             {
                 id: 8,
-                name: "Graphite Moon Phase Mobile",
-                price: 75,
+                name: "Mobile Phases Lunaires Graphite",
+                price: 11250, // DZD
                 category: "graphite",
-                description: "Elegant moon phase mobile, hand-crafted with attention to detail.",
-                dimensions: "18 wide",
-                material: "Graphite & Brass",
+                description: "Élégant mobile des phases lunaires, fabriqué à la main avec attention aux détails.",
+                dimensions: "18 cm",
+                material: "Graphite & Laiton",
                 color: "#D4A5A5",
                 images: [
                     { type: 'svg', color: '#D4A5A5', category: 'graphite' },
@@ -1069,12 +1069,12 @@
             },
             {
                 id: 9,
-                name: "Cinnamon Spice Candle",
-                price: 28,
+                name: "Bougie Épices de Cannelle",
+                price: 4200, // DZD
                 category: "candles",
-                description: "Cozy cinnamon with warm clove and orange zest.",
-                scent: "Cinnamon & Spice",
-                burnTime: "40 hours",
+                description: "Cannelle douce avec des notes de clou de girofle et de zeste d'orange.",
+                scent: "Cannelle & Épices",
+                burnTime: "40 heures",
                 color: "#A67C52",
                 images: [
                     { type: 'svg', color: '#A67C52', category: 'candles' },
@@ -1084,7 +1084,7 @@
             }
         ];
 
-        // DOM Elements
+        // Éléments DOM
         const productsGrid = document.getElementById('productsGrid');
         const filterBtns = document.querySelectorAll('.filter-btn');
         const hamburger = document.getElementById('hamburger');
@@ -1101,7 +1101,12 @@
         let currentGalleryIndex = 0;
         let currentProduct = null;
 
-        // Render Products
+        // Fonction pour formater le prix en DZD
+        function formatPrice(price) {
+            return price.toLocaleString('fr-DZ') + ' DA';
+        }
+
+        // Rendu des Produits
         function renderProducts(filter = 'all') {
             const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
             
@@ -1116,7 +1121,7 @@
                     </div>
                     <div class="p-6">
                         <span class="text-xs uppercase tracking-wider" style="color: var(--accent);">
-                            ${product.category === 'candles' ? 'Candle' : 'Decor'}
+                            ${product.category === 'candles' ? 'Bougie' : 'Décor'}
                         </span>
                         <h3 class="text-xl font-light mt-2 mb-2" style="font-family: 'Cormorant Garamond', serif;">
                             ${product.name}
@@ -1125,9 +1130,9 @@
                             ${product.description}
                         </p>
                         <div class="flex items-center justify-between">
-                            <span class="text-lg font-medium">$${product.price}</span>
+                            <span class="text-lg font-medium">${formatPrice(product.price)}</span>
                             <button class="btn-secondary text-xs py-2 px-4" onclick="openProductModal(${product.id})">
-                                View Details
+                                Voir Détails
                             </button>
                         </div>
                     </div>
@@ -1175,7 +1180,7 @@
             `;
         }
 
-        // Open Modal
+        // Ouvrir la Modale
         window.openProductModal = function(productId) {
             const product = products.find(p => p.id === productId);
             if (!product) return;
@@ -1231,7 +1236,7 @@
                 ${galleryHTML}
                 <div class="modal-body">
                     <span class="text-xs uppercase tracking-wider" style="color: var(--accent);">
-                        ${product.category === 'candles' ? 'Handcrafted Candle' : 'Graphite Decoration'}
+                        ${product.category === 'candles' ? 'Bougie Artisanale' : 'Décoration Graphite'}
                     </span>
                     <h3 id="modalTitle" class="text-2xl font-light mt-2 mb-4" style="font-family: 'Cormorant Garamond', serif;">
                         ${product.name}
@@ -1239,29 +1244,29 @@
                     <p class="mb-6" style="color: var(--muted);">${product.description}</p>
                     
                     <div class="space-y-3 mb-6 py-4 border-t border-b border-[var(--border)]">
-                        ${product.scent ? `<div class="flex justify-between"><span style="color: var(--muted);">Scent</span><span>${product.scent}</span></div>` : ''}
-                        ${product.burnTime ? `<div class="flex justify-between"><span style="color: var(--muted);">Burn Time</span><span>${product.burnTime}</span></div>` : ''}
+                        ${product.scent ? `<div class="flex justify-between"><span style="color: var(--muted);">Parfum</span><span>${product.scent}</span></div>` : ''}
+                        ${product.burnTime ? `<div class="flex justify-between"><span style="color: var(--muted);">Durée de combustion</span><span>${product.burnTime}</span></div>` : ''}
                         ${product.dimensions ? `<div class="flex justify-between"><span style="color: var(--muted);">Dimensions</span><span>${product.dimensions}</span></div>` : ''}
-                        ${product.material ? `<div class="flex justify-between"><span style="color: var(--muted);">Material</span><span>${product.material}</span></div>` : ''}
+                        ${product.material ? `<div class="flex justify-between"><span style="color: var(--muted);">Matériau</span><span>${product.material}</span></div>` : ''}
                     </div>
                     
                     <div class="flex items-center justify-between mb-6">
-                        <span class="text-2xl font-light">$${product.price}</span>
+                        <span class="text-2xl font-light">${formatPrice(product.price)}</span>
                     </div>
                     
                     <div class="space-y-3 pb-6">
-                        <a href="tel:+1234567890" class="btn-primary block text-center">
-                            Call to Order
+                        <a href="tel:+213123456789" class="btn-primary block text-center">
+                            Appeler pour Commander
                         </a>
-                        <a href="mailto:contact@rymacandles.com?subject=Order: ${encodeURIComponent(product.name)}" class="btn-secondary block text-center">
-                            Email to Order
+                        <a href="mailto:contact@rymaart.com?subject=Commande: ${encodeURIComponent(product.name)}" class="btn-secondary block text-center">
+                            Email pour Commander
                         </a>
                     </div>
                 </div>
             `;
         }
 
-        // Gallery navigation
+        // Navigation dans la galerie
         window.changeGalleryImage = function(direction) {
             if (!currentProduct || !currentProduct.images) return;
             
@@ -1283,7 +1288,7 @@
             renderModalContent();
         }
 
-        // Close modal function
+        // Fermer la modale
         function closeModal() {
             productModal.classList.remove('active');
             document.body.classList.remove('modal-open');
@@ -1291,7 +1296,7 @@
             currentGalleryIndex = 0;
         }
 
-        // Contact Form
+        // Formulaire de Contact
         if (contactForm) {
             contactForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -1302,17 +1307,17 @@
                 const formData = {
                     name: document.getElementById('name').value,
                     email: document.getElementById('email').value,
-                    phone: document.getElementById('phone').value || 'Not provided',
+                    phone: document.getElementById('phone').value || 'Non fourni',
                     subject: document.getElementById('subject').value,
                     message: document.getElementById('message').value,
-                    time: new Date().toLocaleString()
+                    time: new Date().toLocaleString('fr-FR')
                 };
                 
                 const subjectMap = {
-                    'order': 'Place an Order',
-                    'custom': 'Custom Request',
-                    'question': 'Product Question',
-                    'other': 'Other'
+                    'order': 'Passer une Commande',
+                    'custom': 'Demande Personnalisée',
+                    'question': 'Question sur un Produit',
+                    'other': 'Autre'
                 };
                 
                 const templateParams = {
@@ -1332,7 +1337,7 @@
                         templateParams
                     );
                     
-                    toast.textContent = 'Message sent successfully! We\'ll get back to you soon.';
+                    toast.textContent = 'Message envoyé avec succès ! Nous vous répondrons bientôt.';
                     toast.classList.add('active');
                     
                     contactForm.reset();
@@ -1342,7 +1347,7 @@
                     }, 5000);
                     
                 } catch (error) {
-                    toast.textContent = 'Failed to send message. Please try again or email us directly.';
+                    toast.textContent = 'Échec de l\'envoi du message. Veuillez réessayer ou nous envoyer un email directement.';
                     toast.classList.add('active');
                     
                     setTimeout(() => {
@@ -1356,7 +1361,7 @@
             });
         }
 
-        // Mobile Menu
+        // Menu Mobile
         function closeMobileMenu() {
             hamburger.classList.remove('active');
             mobileMenu.classList.remove('active');
@@ -1379,7 +1384,7 @@
             link.addEventListener('click', closeMobileMenu);
         });
 
-        // Filter Buttons
+        // Boutons de filtre
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
@@ -1388,7 +1393,7 @@
             });
         });
 
-        // Modal Close
+        // Fermeture de la modale
         closeModalBtn.addEventListener('click', closeModal);
         
         productModal.addEventListener('click', (e) => {
@@ -1402,7 +1407,7 @@
             }
         });
 
-        // Scroll Reveal
+        // Révélation au défilement
         function initRevealAnimations() {
             const reveals = document.querySelectorAll('.reveal');
             const observer = new IntersectionObserver((entries) => {
@@ -1416,7 +1421,7 @@
             reveals.forEach(el => observer.observe(el));
         }
 
-        // Initialize
+        // Initialisation
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts();
         });

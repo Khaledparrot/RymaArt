@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ryma Candles | Handcrafted Candles & Graphite Decor</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS Variables for Theme --- */
+        :root {
+            --bg: #FDF8F4;
+            --fg: #3D3632;
+            --muted: #8B7E74;
+            --accent: #C4A484;
+            --accent-dark: #A67C52;
+            --card: #FFFFFF;
+            --border: #E8DED4;
+            --cream: #F5EDE6;
+            --rose: #D4A5A5;
+            --sage: #9CAF88;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background-color: var(--bg);
+            color: var(--fg);
+            font-weight: 300;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .animate-fade-up {
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out forwards;
+        }
+
+        .animate-fade-in {
+            opacity: 0;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+
+        /* --- Hero Background Elements --- */
+        .hero-bg {
+            background: linear-gradient(135deg, var(--cream) 0%, var(--bg) 50%, #F9F3ED 100%);
+            position: relative;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(50px);
+            opacity: 0.4;
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        /* --- Navigation --- */
+        .nav-link {
+            position: relative;
+            color: var(--fg);
+            text-decoration: none;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link:focus::after {
+            width: 100%;
+        }
+
+        /* --- Buttons --- */
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            padding: 14px 32px;
+            border: none;
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(196, 164, 132, 0.3);
+        }
+
+        .btn-primary.loading {
+            color: transparent;
+            pointer-events: none;
+        }
+        
+        .btn-primary.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid white;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spinner 0.6s linear infinite;
+        }
+        
+        @keyframes spinner {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--fg);
+            padding: 14px 32px;
+            border: 1px solid var(--border);
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+
+        /* --- Product Cards --- */
+        .product-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--rose), var(--sage));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(61, 54, 50, 0.08);
+        }
+
+        .product-image {
+            background: var(--cream);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* --- Category Filter --- */
+        .filter-btn {
+            background: transparent;
+            border: none;
+            padding: 10px 20px;
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .filter-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            color: var(--fg);
+        }
+
+        .filter-btn.active::after,
+        .filter-btn:hover::after {
+            width: 30px;
+        }
+
+        /* --- Forms --- */
+        .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            font-family: 'Jost', sans-serif;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            color: var(--fg);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(196, 164, 132, 0.1);
+        }
+
+        /* --- Reveal on Scroll --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Mobile Menu --- */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: var(--card);
+            z-index: 1000;
+            transition: right 0.4s ease;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        }
+
+        .mobile-menu.active { 
+            right: 0; 
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--cream);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1002;
+        }
+
+        .mobile-menu-close:hover {
+            background: var(--accent);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .mobile-menu-close svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--fg);
+        }
+
+        .mobile-menu-close:hover svg {
+            stroke: white;
+        }
+
+        .mobile-nav {
+            padding: 80px 40px 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .mobile-nav a {
+            font-size: 20px;
+            color: var(--fg);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--accent);
+            transform: translateX(10px);
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(61, 54, 50, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            z-index: 999;
+        }
+
+        .mobile-overlay.active { 
+            opacity: 1; 
+            visibility: visible; 
+        }
+
+        .hamburger {
+            width: 28px;
+            height: 20px;
+            position: relative;
+            cursor: pointer;
+            display: none;
+            background: none;
+            border: none;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--fg);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 9px; }
+        .hamburger span:nth-child(3) { bottom: 0; }
+
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg); top: 9px; }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg); bottom: 9px; }
+
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .desktop-nav { display: none; }
+        }
+
+        /* --- Modal --- */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(61, 54, 50, 0.8);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal.active { 
+            opacity: 1; 
+            visibility: visible; 
+        }
+
+        .modal-content {
+            background: var(--card);
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal.active .modal-content { 
+            transform: scale(1); 
+        }
+
+        /* Close button for modal - Always visible */
+        .modal-close {
+            position: sticky;
+            top: 20px;
+            float: right;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2100;
+            margin: 20px 20px 0 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-close:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .modal-close:hover svg {
+            stroke: white;
+        }
+
+        .modal-close svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--fg);
+            transition: stroke 0.3s ease;
+        }
+
+        /* Image Gallery */
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            background: var(--cream);
+            overflow: hidden;
+            clear: both;
+        }
+
+        .gallery-images {
+            display: flex;
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .gallery-image {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2005;
+        }
+
+        .gallery-nav:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .gallery-nav:hover svg {
+            stroke: white;
+        }
+
+        .gallery-nav.prev {
+            left: 20px;
+        }
+
+        .gallery-nav.next {
+            right: 20px;
+        }
+
+        .gallery-nav svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--fg);
+        }
+
+        .gallery-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 2005;
+        }
+
+        .gallery-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-dot.active {
+            background: var(--accent);
+            transform: scale(1.2);
+            border-color: var(--accent);
+        }
+
+        /* Modal content area with padding */
+        .modal-body {
+            padding: 0 24px 24px 24px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--fg);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 4px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 3000;
+            max-width: 90%;
+        }
+        .toast.active { transform: translateY(0); opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[var(--bg)]/90 backdrop-blur-md">
+        <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#" class="font-['Cormorant_Garamond'] text-2xl md:text-3xl font-light tracking-wider" style="color: var(--fg);">
+                Ryma Candles
+            </a>
+            
+            <!-- Desktop Navigation - Hidden on mobile -->
+            <div class="desktop-nav hidden md:flex items-center gap-8">
+                <a href="#products" class="nav-link text-sm uppercase tracking-widest">Shop</a>
+                <a href="#about" class="nav-link text-sm uppercase tracking-widest">About</a>
+                <a href="#contact" class="nav-link text-sm uppercase tracking-widest">Contact</a>
+            </div>
+
+            <!-- Hamburger Menu - Visible on mobile only -->
+            <button class="hamburger md:hidden" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
+        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+        <nav class="mobile-nav">
+            <a href="#products">Shop</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center relative overflow-hidden">
+        <div class="orb" style="width: 400px; height: 400px; background: var(--accent); top: 10%; right: 10%;"></div>
+        <div class="orb" style="width: 300px; height: 300px; background: var(--rose); bottom: 10%; left: 5%; animation-delay: -2s;"></div>
+        <div class="orb" style="width: 200px; height: 200px; background: var(--sage); top: 40%; left: 40%; animation-delay: -4s;"></div>
+
+        <div class="max-w-7xl mx-auto px-6 pt-24 pb-16 relative z-10 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <p class="animate-fade-up text-sm uppercase tracking-[0.3em] mb-6" style="color: var(--muted);">
+                        Handcrafted with Love
+                    </p>
+                    <h1 class="animate-fade-up delay-100 text-5xl md:text-6xl lg:text-7xl font-light leading-tight mb-6" style="color: var(--fg);">
+                        Ryma Candles<br>
+                        <span class="italic" style="color: var(--accent);">& Graphite Art</span>
+                    </h1>
+                    <p class="animate-fade-up delay-200 text-lg mb-10 max-w-md mx-auto lg:mx-0" style="color: var(--muted);">
+                        Discover our collection of meticulously handcrafted candles and unique graphite decorations, designed to bring warmth and elegance to your home.
+                    </p>
+                    <div class="animate-fade-up delay-300 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#products" class="btn-primary">Explore Collection</a>
+                        <a href="#contact" class="btn-secondary">Contact Us</a>
+                    </div>
+                </div>
+                
+                <div class="animate-fade-in delay-400 relative hidden lg:block">
+                    <div class="relative w-full aspect-square max-w-md mx-auto">
+                        <div class="absolute inset-0 rounded-full" style="background: linear-gradient(135deg, var(--cream) 0%, var(--rose) 50%, var(--accent) 100%); opacity: 0.3; filter: blur(20px);"></div>
+                        <div class="absolute inset-8 rounded-full bg-white/80 backdrop-blur-sm shadow-2xl flex items-center justify-center">
+                             <svg viewBox="0 0 200 200" class="w-48 h-48 opacity-90">
+                                <ellipse cx="100" cy="150" rx="40" ry="10" fill="#E8DED4"/>
+                                <rect x="60" y="80" width="80" height="70" rx="4" fill="#F5EDE6" stroke="#E8DED4"/>
+                                <rect x="65" y="85" width="70" height="60" rx="2" fill="#FFFFFF"/>
+                                <path d="M100 80 L100 50" stroke="#C4A484" stroke-width="2"/>
+                                <ellipse cx="100" cy="45" rx="8" ry="12" fill="#D4A5A5" opacity="0.8"/>
+                                <ellipse cx="100" cy="42" rx="4" ry="8" fill="#A67C52"/>
+                                <circle cx="60" cy="60" r="2" fill="#C4A484" opacity="0.6"/>
+                                <circle cx="140" cy="90" r="2" fill="#D4A5A5" opacity="0.6"/>
+                             </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-fade-in delay-500">
+            <a href="#products" class="flex flex-col items-center gap-2" style="color: var(--muted);" aria-label="Scroll down">
+                <span class="text-xs uppercase tracking-widest">Scroll</span>
+                <svg width="20" height="30" viewBox="0 0 20 30" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="1" y="1" width="18" height="28" rx="9"/>
+                    <circle cx="10" cy="10" r="2" fill="currentColor">
+                        <animate attributeName="cy" values="10;18;10" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-24 relative bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <p class="text-sm uppercase tracking-[0.3em] mb-4" style="color: var(--accent);">Our Collection</p>
+                <h2 class="text-4xl md:text-5xl font-light mb-6">Handcrafted Products</h2>
+                <p class="max-w-xl mx-auto" style="color: var(--muted);">
+                    Each piece is thoughtfully created using premium materials, ensuring beauty and quality in every detail.
+                </p>
+            </div>
+
+            <div class="flex justify-center gap-2 md:gap-4 mb-12 flex-wrap reveal" role="tablist">
+                <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Products</button>
+                <button class="filter-btn" data-filter="candles" role="tab" aria-selected="false">Candles</button>
+                <button class="filter-btn" data-filter="graphite" role="tab" aria-selected="false">Graphite Decor</button>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="productsGrid"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative overflow-hidden bg-[var(--cream)]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal order-2 lg:order-1">
+                    <p class="text-sm uppercase tracking-[0.3em] mb-4" style="color: var(--accent);">Our Story</p>
+                    <h2 class="text-4xl md:text-5xl font-light mb-8">Crafted with Passion</h2>
+                    <div class="space-y-6" style="color: var(--muted);">
+                        <p>Ryma Candles began as a small passion project in my home studio, where I discovered the art of transforming simple materials into pieces that bring joy and warmth to everyday spaces.</p>
+                        <p>Each candle is hand-poured using eco-friendly soy wax and premium fragrance oils, while our graphite decorations are carefully sculpted to capture light and shadow in unique ways.</p>
+                        <p>We believe that beautiful, handcrafted items should be accessible to everyone who appreciates the artistry and care that goes into making them.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-8 mt-12 pt-8 border-t border-[var(--border)]">
+                        <div class="text-center">
+                            <p class="text-3xl font-light" style="color: var(--accent);">100+</p>
+                            <p class="text-sm uppercase tracking-wider mt-2" style="color: var(--muted);">Products</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-3xl font-light" style="color: var(--accent);">500+</p>
+                            <p class="text-sm uppercase tracking-wider mt-2" style="color: var(--muted);">Happy Clients</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-3xl font-light" style="color: var(--accent);">3+</p>
+                            <p class="text-sm uppercase tracking-wider mt-2" style="color: var(--muted);">Years</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal order-1 lg:order-2">
+                    <div class="relative aspect-square">
+                        <div class="absolute inset-0 bg-gradient-to-br from-[var(--bg)] to-[var(--accent)] opacity-20 rounded-lg"></div>
+                        <div class="absolute inset-4 bg-white shadow-2xl rounded-lg flex items-center justify-center overflow-hidden">
+                            <svg viewBox="0 0 400 400" class="w-full h-full p-8 opacity-80">
+                                <circle cx="200" cy="200" r="150" fill="none" stroke="#E8DED4" stroke-width="1"/>
+                                <circle cx="200" cy="200" r="100" fill="none" stroke="#E8DED4" stroke-width="1"/>
+                                <path d="M150 250 Q200 150 250 250" fill="none" stroke="#C4A484" stroke-width="2"/>
+                                <circle cx="200" cy="180" r="40" fill="none" stroke="#D4A5A5" stroke-width="2"/>
+                                <path d="M180 280 L200 220 L220 280" fill="none" stroke="#9CAF88" stroke-width="2"/>
+                                <circle cx="120" cy="120" r="10" fill="#C4A484" opacity="0.4"/>
+                                <circle cx="280" cy="150" r="15" fill="#D4A5A5" opacity="0.4"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-[var(--bg)]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <p class="text-sm uppercase tracking-[0.3em] mb-4" style="color: var(--accent);">Get in Touch</p>
+                <h2 class="text-4xl md:text-5xl font-light mb-6">Contact Us</h2>
+                <p class="max-w-xl mx-auto" style="color: var(--muted);">
+                    We'd love to hear from you. Place an order or ask us anything about our products.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-16 reveal">
+                <div class="bg-white border border-[var(--border)] p-8 text-center hover:border-[var(--accent)] transition-colors">
+                    <div class="w-14 h-14 bg-[var(--cream)] rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C4A484" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-light mb-2">Call Us</h3>
+                    <p class="text-sm mb-4" style="color: var(--muted);">Speak directly with us</p>
+                    <a href="tel:+1234567890" class="text-lg font-medium" style="color: var(--accent);">+1 (234) 567-890</a>
+                </div>
+
+                <div class="bg-white border border-[var(--border)] p-8 text-center hover:border-[var(--accent)] transition-colors">
+                    <div class="w-14 h-14 bg-[var(--cream)] rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C4A484" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-light mb-2">Email Us</h3>
+                    <p class="text-sm mb-4" style="color: var(--muted);">We respond within 24h</p>
+                    <a href="mailto:contact@rymacandles.com" class="text-lg font-medium" style="color: var(--accent);">contact@rymacandles.com</a>
+                </div>
+
+                <div class="bg-white border border-[var(--border)] p-8 text-center hover:border-[var(--accent)] transition-colors">
+                    <div class="w-14 h-14 bg-[var(--cream)] rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C4A484" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-light mb-2">Business Hours</h3>
+                    <p class="text-sm mb-4" style="color: var(--muted);">Available for calls</p>
+                    <p class="text-lg font-medium" style="color: var(--fg);">Mon - Sat: 9AM - 6PM</p>
+                </div>
+            </div>
+
+            <div class="max-w-2xl mx-auto reveal">
+                <div class="p-8 md:p-12 bg-white border border-[var(--border)]">
+                    <h3 class="text-2xl font-light mb-8 text-center">Send us a Message</h3>
+                    <form id="contactForm" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm uppercase tracking-wider mb-2" style="color: var(--muted);">Your Name</label>
+                                <input type="text" id="name" name="name" required class="form-input" placeholder="Jane Doe">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm uppercase tracking-wider mb-2" style="color: var(--muted);">Email Address</label>
+                                <input type="email" id="email" name="email" required class="form-input" placeholder="jane@example.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm uppercase tracking-wider mb-2" style="color: var(--muted);">Phone Number (Optional)</label>
+                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="+1 (234) 567-890">
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-sm uppercase tracking-wider mb-2" style="color: var(--muted);">Subject</label>
+                            <select id="subject" name="subject" required class="form-input">
+                                <option value="">Select a subject</option>
+                                <option value="order">Place an Order</option>
+                                <option value="custom">Custom Request</option>
+                                <option value="question">Product Question</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm uppercase tracking-wider mb-2" style="color: var(--muted);">Your Message</label>
+                            <textarea id="message" name="message" required class="form-input" rows="5" placeholder="Tell us about your order or question..."></textarea>
+                        </div>
+                        <button type="submit" id="submitBtn" class="btn-primary w-full">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-[var(--fg)] text-[var(--cream)]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="md:col-span-2">
+                    <h3 class="text-2xl font-light mb-4" style="font-family: 'Cormorant Garamond', serif;">Ryma Candles</h3>
+                    <p class="mb-6 opacity-70 max-w-md">
+                        Handcrafted candles and graphite decorations, made with love and care for your beautiful home.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-sm uppercase tracking-wider mb-4">Quick Links</h4>
+                    <nav class="flex flex-col gap-3">
+                        <a href="#products" class="opacity-70 hover:opacity-100 transition-opacity">Products</a>
+                        <a href="#about" class="opacity-70 hover:opacity-100 transition-opacity">About Us</a>
+                        <a href="#contact" class="opacity-70 hover:opacity-100 transition-opacity">Contact</a>
+                    </nav>
+                </div>
+                
+                <div>
+                    <h4 class="text-sm uppercase tracking-wider mb-4">Connect</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 transition-colors" aria-label="Instagram">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 transition-colors" aria-label="Facebook">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-8 text-center text-sm opacity-50 border-t border-white/10">
+                <p>2024 Ryma Candles. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Modal - Fixed with visible X button -->
+    <div class="modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <!-- X Close Button - Always visible -->
+            <button class="modal-close" id="closeModal" aria-label="Close modal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+    <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY");
+        })();
+
+        // Product Data
+        const products = [
+            {
+                id: 1,
+                name: "Lavender Dreams Candle",
+                price: 28,
+                category: "candles",
+                description: "A soothing blend of French lavender and vanilla, perfect for relaxation.",
+                scent: "Lavender & Vanilla",
+                burnTime: "45 hours",
+                color: "#D4A5A5",
+                images: [
+                    { type: 'svg', color: '#D4A5A5', category: 'candles' },
+                    { type: 'svg', color: '#E8B4B8', category: 'candles' },
+                    { type: 'svg', color: '#C4A484', category: 'candles' }
+                ]
+            },
+            {
+                id: 2,
+                name: "Graphite Lotus Sculpture",
+                price: 65,
+                category: "graphite",
+                description: "An elegant lotus flower sculpture, hand-carved from premium graphite.",
+                dimensions: "6 x 4 x 4",
+                material: "Natural Graphite",
+                color: "#8B7E74",
+                images: [
+                    { type: 'svg', color: '#8B7E74', category: 'graphite' },
+                    { type: 'svg', color: '#A67C52', category: 'graphite' },
+                    { type: 'svg', color: '#9CAF88', category: 'graphite' }
+                ]
+            },
+            {
+                id: 3,
+                name: "Rose Garden Candle",
+                price: 32,
+                category: "candles",
+                description: "Romantic rose petals with hints of peony and soft musk.",
+                scent: "Rose & Peony",
+                burnTime: "50 hours",
+                color: "#E8B4B8",
+                images: [
+                    { type: 'svg', color: '#E8B4B8', category: 'candles' },
+                    { type: 'svg', color: '#D4A5A5', category: 'candles' },
+                    { type: 'svg', color: '#C4A484', category: 'candles' }
+                ]
+            },
+            {
+                id: 4,
+                name: "Graphite Feather Wall Art",
+                price: 85,
+                category: "graphite",
+                description: "Delicate feather design, perfect for modern home decor.",
+                dimensions: "12 x 16",
+                material: "Graphite on Canvas",
+                color: "#9CAF88",
+                images: [
+                    { type: 'svg', color: '#9CAF88', category: 'graphite' },
+                    { type: 'svg', color: '#8B7E74', category: 'graphite' },
+                    { type: 'svg', color: '#A67C52', category: 'graphite' }
+                ]
+            },
+            {
+                id: 5,
+                name: "Vanilla Bourbon Candle",
+                price: 30,
+                category: "candles",
+                description: "Warm vanilla bean with rich bourbon undertones.",
+                scent: "Vanilla & Bourbon",
+                burnTime: "40 hours",
+                color: "#C4A484",
+                images: [
+                    { type: 'svg', color: '#C4A484', category: 'candles' },
+                    { type: 'svg', color: '#A67C52', category: 'candles' },
+                    { type: 'svg', color: '#D4A5A5', category: 'candles' }
+                ]
+            },
+            {
+                id: 6,
+                name: "Graphite Geometric Set",
+                price: 95,
+                category: "graphite",
+                description: "Set of 3 minimalist geometric sculptures for shelf or desk display.",
+                dimensions: "3 - 5 tall",
+                material: "Natural Graphite",
+                color: "#A67C52",
+                images: [
+                    { type: 'svg', color: '#A67C52', category: 'graphite' },
+                    { type: 'svg', color: '#8B7E74', category: 'graphite' },
+                    { type: 'svg', color: '#9CAF88', category: 'graphite' }
+                ]
+            },
+            {
+                id: 7,
+                name: "Ocean Breeze Candle",
+                price: 26,
+                category: "candles",
+                description: "Fresh sea salt and driftwood for a coastal atmosphere.",
+                scent: "Sea Salt & Driftwood",
+                burnTime: "45 hours",
+                color: "#9CAF88",
+                images: [
+                    { type: 'svg', color: '#9CAF88', category: 'candles' },
+                    { type: 'svg', color: '#C4A484', category: 'candles' },
+                    { type: 'svg', color: '#D4A5A5', category: 'candles' }
+                ]
+            },
+            {
+                id: 8,
+                name: "Graphite Moon Phase Mobile",
+                price: 75,
+                category: "graphite",
+                description: "Elegant moon phase mobile, hand-crafted with attention to detail.",
+                dimensions: "18 wide",
+                material: "Graphite & Brass",
+                color: "#D4A5A5",
+                images: [
+                    { type: 'svg', color: '#D4A5A5', category: 'graphite' },
+                    { type: 'svg', color: '#9CAF88', category: 'graphite' },
+                    { type: 'svg', color: '#8B7E74', category: 'graphite' }
+                ]
+            },
+            {
+                id: 9,
+                name: "Cinnamon Spice Candle",
+                price: 28,
+                category: "candles",
+                description: "Cozy cinnamon with warm clove and orange zest.",
+                scent: "Cinnamon & Spice",
+                burnTime: "40 hours",
+                color: "#A67C52",
+                images: [
+                    { type: 'svg', color: '#A67C52', category: 'candles' },
+                    { type: 'svg', color: '#C4A484', category: 'candles' },
+                    { type: 'svg', color: '#D4A5A5', category: 'candles' }
+                ]
+            }
+        ];
+
+        // DOM Elements
+        const productsGrid = document.getElementById('productsGrid');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const productModal = document.getElementById('productModal');
+        const modalContent = document.getElementById('modalContent');
+        const closeModalBtn = document.getElementById('closeModal');
+        const toast = document.getElementById('toast');
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        let currentGalleryIndex = 0;
+        let currentProduct = null;
+
+        // Render Products
+        function renderProducts(filter = 'all') {
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+            
+            productsGrid.innerHTML = filtered.map((product, index) => `
+                <article class="product-card reveal" data-category="${product.category}" style="animation-delay: ${index * 0.1}s">
+                    <div class="product-image aspect-square flex items-center justify-center p-8">
+                        <div class="w-3/4 h-3/4 relative flex items-center justify-center">
+                             <div class="absolute inset-0 rounded-full opacity-20" style="background: ${product.color};"></div>
+                             <div class="absolute inset-6 rounded-full bg-white shadow-sm"></div>
+                             ${getProductIcon(product.category, product.color)}
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs uppercase tracking-wider" style="color: var(--accent);">
+                            ${product.category === 'candles' ? 'Candle' : 'Decor'}
+                        </span>
+                        <h3 class="text-xl font-light mt-2 mb-2" style="font-family: 'Cormorant Garamond', serif;">
+                            ${product.name}
+                        </h3>
+                        <p class="text-sm mb-4" style="color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                            ${product.description}
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-lg font-medium">$${product.price}</span>
+                            <button class="btn-secondary text-xs py-2 px-4" onclick="openProductModal(${product.id})">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+            
+            initRevealAnimations();
+        }
+
+        function getProductIcon(category, color) {
+            if (category === 'candles') {
+                return `
+                    <svg viewBox="0 0 60 80" class="w-12 h-16 relative z-10" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));">
+                        <rect x="15" y="25" width="30" height="40" rx="2" fill="#F5EDE6" stroke="#E8DED4"/>
+                        <rect x="17" y="27" width="26" height="36" rx="1" fill="#FFFFFF"/>
+                        <path d="M30 25 L30 15" stroke="#C4A484" stroke-width="2"/>
+                        <ellipse cx="30" cy="12" rx="4" ry="6" fill="${color}" opacity="0.8"/>
+                    </svg>
+                `;
+            }
+            return `
+                <svg viewBox="0 0 60 60" class="w-12 h-12 relative z-10" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));">
+                    <polygon points="30,5 55,50 5,50" fill="none" stroke="${color}" stroke-width="1.5"/>
+                    <polygon points="30,15 45,45 15,45" fill="#F5EDE6" stroke="#E8DED4"/>
+                </svg>
+            `;
+        }
+
+        function getGalleryIcon(image, index) {
+            if (image.category === 'candles') {
+                return `
+                    <svg viewBox="0 0 60 80" class="w-24 h-32">
+                        <rect x="15" y="25" width="30" height="40" rx="2" fill="#F5EDE6" stroke="#E8DED4"/>
+                        <rect x="17" y="27" width="26" height="36" rx="1" fill="#FFFFFF"/>
+                        <path d="M30 25 L30 15" stroke="#C4A484" stroke-width="2"/>
+                        <ellipse cx="30" cy="12" rx="4" ry="6" fill="${image.color}" opacity="0.8"/>
+                    </svg>
+                `;
+            }
+            return `
+                <svg viewBox="0 0 60 60" class="w-24 h-24">
+                    <polygon points="30,5 55,50 5,50" fill="none" stroke="${image.color}" stroke-width="1.5"/>
+                    <polygon points="30,15 45,45 15,45" fill="#F5EDE6" stroke="#E8DED4"/>
+                </svg>
+            `;
+        }
+
+        // Open Modal
+        window.openProductModal = function(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            currentProduct = product;
+            currentGalleryIndex = 0;
+            
+            renderModalContent();
+            
+            productModal.classList.add('active');
+            document.body.classList.add('modal-open');
+        }
+
+        function renderModalContent() {
+            if (!currentProduct) return;
+            
+            const product = currentProduct;
+            const images = product.images || [];
+            
+            const galleryHTML = `
+                <div class="gallery-container">
+                    <div class="gallery-images" id="galleryImages" style="transform: translateX(-${currentGalleryIndex * 100}%)">
+                        ${images.map((image, idx) => `
+                            <div class="gallery-image">
+                                ${getGalleryIcon(image, idx)}
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    ${images.length > 1 ? `
+                        <button class="gallery-nav prev" onclick="changeGalleryImage(-1)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="15 18 9 12 15 6"/>
+                            </svg>
+                        </button>
+                        <button class="gallery-nav next" onclick="changeGalleryImage(1)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="9 18 15 12 9 6"/>
+                            </svg>
+                        </button>
+                        
+                        <div class="gallery-dots">
+                            ${images.map((_, idx) => `
+                                <span class="gallery-dot ${idx === currentGalleryIndex ? 'active' : ''}" 
+                                      onclick="setGalleryImage(${idx})"></span>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            modalContent.innerHTML = `
+                ${galleryHTML}
+                <div class="modal-body">
+                    <span class="text-xs uppercase tracking-wider" style="color: var(--accent);">
+                        ${product.category === 'candles' ? 'Handcrafted Candle' : 'Graphite Decoration'}
+                    </span>
+                    <h3 id="modalTitle" class="text-2xl font-light mt-2 mb-4" style="font-family: 'Cormorant Garamond', serif;">
+                        ${product.name}
+                    </h3>
+                    <p class="mb-6" style="color: var(--muted);">${product.description}</p>
+                    
+                    <div class="space-y-3 mb-6 py-4 border-t border-b border-[var(--border)]">
+                        ${product.scent ? `<div class="flex justify-between"><span style="color: var(--muted);">Scent</span><span>${product.scent}</span></div>` : ''}
+                        ${product.burnTime ? `<div class="flex justify-between"><span style="color: var(--muted);">Burn Time</span><span>${product.burnTime}</span></div>` : ''}
+                        ${product.dimensions ? `<div class="flex justify-between"><span style="color: var(--muted);">Dimensions</span><span>${product.dimensions}</span></div>` : ''}
+                        ${product.material ? `<div class="flex justify-between"><span style="color: var(--muted);">Material</span><span>${product.material}</span></div>` : ''}
+                    </div>
+                    
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="text-2xl font-light">$${product.price}</span>
+                    </div>
+                    
+                    <div class="space-y-3 pb-6">
+                        <a href="tel:+1234567890" class="btn-primary block text-center">
+                            Call to Order
+                        </a>
+                        <a href="mailto:contact@rymacandles.com?subject=Order: ${encodeURIComponent(product.name)}" class="btn-secondary block text-center">
+                            Email to Order
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Gallery navigation
+        window.changeGalleryImage = function(direction) {
+            if (!currentProduct || !currentProduct.images) return;
+            
+            currentGalleryIndex += direction;
+            
+            if (currentGalleryIndex < 0) {
+                currentGalleryIndex = currentProduct.images.length - 1;
+            } else if (currentGalleryIndex >= currentProduct.images.length) {
+                currentGalleryIndex = 0;
+            }
+            
+            renderModalContent();
+        }
+
+        window.setGalleryImage = function(index) {
+            if (!currentProduct || !currentProduct.images) return;
+            
+            currentGalleryIndex = index;
+            renderModalContent();
+        }
+
+        // Close modal function
+        function closeModal() {
+            productModal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+            currentProduct = null;
+            currentGalleryIndex = 0;
+        }
+
+        // Contact Form
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                submitBtn.classList.add('loading');
+                submitBtn.disabled = true;
+                
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value || 'Not provided',
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value,
+                    time: new Date().toLocaleString()
+                };
+                
+                const subjectMap = {
+                    'order': 'Place an Order',
+                    'custom': 'Custom Request',
+                    'question': 'Product Question',
+                    'other': 'Other'
+                };
+                
+                const templateParams = {
+                    to_email: 'khaledmatrix16@gmail.com',
+                    from_name: formData.name,
+                    from_email: formData.email,
+                    phone: formData.phone,
+                    subject_type: subjectMap[formData.subject] || formData.subject,
+                    message: formData.message,
+                    time: formData.time
+                };
+                
+                try {
+                    await emailjs.send(
+                        'YOUR_SERVICE_ID',
+                        'YOUR_TEMPLATE_ID',
+                        templateParams
+                    );
+                    
+                    toast.textContent = 'Message sent successfully! We\'ll get back to you soon.';
+                    toast.classList.add('active');
+                    
+                    contactForm.reset();
+                    
+                    setTimeout(() => {
+                        toast.classList.remove('active');
+                    }, 5000);
+                    
+                } catch (error) {
+                    toast.textContent = 'Failed to send message. Please try again or email us directly.';
+                    toast.classList.add('active');
+                    
+                    setTimeout(() => {
+                        toast.classList.remove('active');
+                    }, 5000);
+                    
+                } finally {
+                    submitBtn.classList.remove('loading');
+                    submitBtn.disabled = false;
+                }
+            });
+        }
+
+        // Mobile Menu
+        function closeMobileMenu() {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+        }
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+        });
+
+        mobileOverlay.addEventListener('click', closeMobileMenu);
+        
+        if (mobileMenuClose) {
+            mobileMenuClose.addEventListener('click', closeMobileMenu);
+        }
+
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Filter Buttons
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderProducts(btn.dataset.filter);
+            });
+        });
+
+        // Modal Close
+        closeModalBtn.addEventListener('click', closeModal);
+        
+        productModal.addEventListener('click', (e) => {
+            if (e.target === productModal) closeModal();
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+                closeMobileMenu();
+            }
+        });
+
+        // Scroll Reveal
+        function initRevealAnimations() {
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            reveals.forEach(el => observer.observe(el));
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+        });
+    </script>
+</body>
+</html>

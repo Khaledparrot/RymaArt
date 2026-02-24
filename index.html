@@ -243,17 +243,34 @@
             position: relative;
             overflow: hidden;
             aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
         .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
             transition: transform 0.5s ease;
+            display: block;
+            margin: 0 auto;
         }
 
         .product-card:hover .product-image img {
             transform: scale(1.05);
+        }
+
+        .product-image svg {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            display: block;
+            margin: 0 auto;
         }
 
         /* --- Filtre de Catégorie --- */
@@ -547,9 +564,22 @@
         }
 
         .gallery-image img {
-            width: 100%;
-            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
             object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .gallery-image svg {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            display: block;
+            margin: 0 auto;
         }
 
         .gallery-nav {
@@ -977,17 +1007,11 @@
         })();
 
         // Données des Produits avec support d'images locales
-        // === INSTRUCTIONS POUR AJOUTER VOS IMAGES ===
-        // 1. Créez un dossier "images" dans le même dossier que ce fichier HTML
-        // 2. Placez vos images dans ce dossier (format JPG, PNG recommandé)
-        // 3. Remplacez les chemins "images/nom-du-produit-X.jpg" par vos vrais noms de fichiers
-        // 4. Vous pouvez avoir 1 à 3 images par produit
-        
         const products = [
             {
                 id: 1,
                 name: "Bougie Rêves de Lavande",
-                price: 4200, // DZD
+                price: 4200,
                 category: "candles",
                 description: "Un mélange apaisant de lavande française et de vanille, parfait pour la relaxation.",
                 scent: "Lavande & Vanille",
@@ -1002,7 +1026,7 @@
             {
                 id: 2,
                 name: "Sculpture Lotus en Graphite",
-                price: 9750, // DZD
+                price: 9750,
                 category: "graphite",
                 description: "Une élégante sculpture de fleur de lotus, sculptée à la main en graphite premium.",
                 dimensions: "15 x 10 x 10 cm",
@@ -1017,7 +1041,7 @@
             {
                 id: 3,
                 name: "Bougie Jardin de Roses",
-                price: 4800, // DZD
+                price: 4800,
                 category: "candles",
                 description: "Pétales de rose romantiques avec des notes de pivoine et de musc doux.",
                 scent: "Rose & Pivoine",
@@ -1032,7 +1056,7 @@
             {
                 id: 4,
                 name: "Art Mural Plume en Graphite",
-                price: 12750, // DZD
+                price: 12750,
                 category: "graphite",
                 description: "Design délicat de plume, parfait pour la décoration intérieure moderne.",
                 dimensions: "30 x 40 cm",
@@ -1047,7 +1071,7 @@
             {
                 id: 5,
                 name: "Bougie Vanille Bourbon",
-                price: 4500, // DZD
+                price: 4500,
                 category: "candles",
                 description: "Gousse de vanille chaude avec de riches notes de bourbon.",
                 scent: "Vanille & Bourbon",
@@ -1062,7 +1086,7 @@
             {
                 id: 6,
                 name: "Set Géométrique Graphite",
-                price: 14250, // DZD
+                price: 14250,
                 category: "graphite",
                 description: "Set de 3 sculptures géométriques minimalistes pour étagère ou bureau.",
                 dimensions: "8 - 13 cm",
@@ -1077,7 +1101,7 @@
             {
                 id: 7,
                 name: "Bougie Brise Océane",
-                price: 3900, // DZD
+                price: 3900,
                 category: "candles",
                 description: "Sel marin frais et bois flotté pour une atmosphère côtière.",
                 scent: "Sel Marin & Bois Flotté",
@@ -1092,7 +1116,7 @@
             {
                 id: 8,
                 name: "Mobile Phases Lunaires Graphite",
-                price: 11250, // DZD
+                price: 11250,
                 category: "graphite",
                 description: "Élégant mobile des phases lunaires, fabriqué à la main avec attention aux détails.",
                 dimensions: "18 cm",
@@ -1107,7 +1131,7 @@
             {
                 id: 9,
                 name: "Bougie Épices de Cannelle",
-                price: 4200, // DZD
+                price: 4200,
                 category: "candles",
                 description: "Cannelle douce avec des notes de clou de girofle et de zeste d'orange.",
                 scent: "Cannelle & Épices",
@@ -1145,11 +1169,8 @@
 
         // Fonction pour afficher l'icône ou l'image du produit
         function getProductIcon(product) {
-            // Vérifier si le produit a des images
             if (product.images && product.images[0] && product.images[0].type === 'image') {
-                // Essayer de charger la première image
-                return `<img src="${product.images[0].url}" alt="${product.name}" 
-                         onerror="this.onerror=null; this.parentElement.innerHTML='${getFallbackSVG(product)}'">`;
+                return `<img src="${product.images[0].url}" alt="${product.name}" class="product-image-centered">`;
             } else {
                 return getFallbackSVG(product);
             }
@@ -1159,7 +1180,7 @@
         function getFallbackSVG(product) {
             if (product.category === 'candles') {
                 return `
-                    <svg viewBox="0 0 60 80" class="w-12 h-16 relative z-10" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));">
+                    <svg viewBox="0 0 60 80" class="w-12 h-16">
                         <rect x="15" y="25" width="30" height="40" rx="2" fill="#F5EDE6" stroke="#E8DED4"/>
                         <rect x="17" y="27" width="26" height="36" rx="1" fill="#FFFFFF"/>
                         <path d="M30 25 L30 15" stroke="#C4A484" stroke-width="2"/>
@@ -1168,7 +1189,7 @@
                 `;
             }
             return `
-                <svg viewBox="0 0 60 60" class="w-12 h-12 relative z-10" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));">
+                <svg viewBox="0 0 60 60" class="w-12 h-12">
                     <polygon points="30,5 55,50 5,50" fill="none" stroke="${product.color || '#8B7E74'}" stroke-width="1.5"/>
                     <polygon points="30,15 45,45 15,45" fill="#F5EDE6" stroke="#E8DED4"/>
                 </svg>
@@ -1178,8 +1199,7 @@
         // Fonction pour afficher l'image dans la galerie
         function getGalleryIcon(image, index) {
             if (image.type === 'image') {
-                return `<img src="${image.url}" alt="${image.alt || 'Image produit'}" 
-                         onerror="this.onerror=null; this.parentElement.innerHTML='${getFallbackGallerySVG(image)}'">`;
+                return `<img src="${image.url}" alt="${image.alt || 'Image produit'}" class="gallery-image-centered">`;
             } else {
                 return getFallbackGallerySVG(image);
             }
@@ -1211,10 +1231,8 @@
             
             productsGrid.innerHTML = filtered.map((product, index) => `
                 <article class="product-card reveal" data-category="${product.category}" style="animation-delay: ${index * 0.1}s">
-                    <div class="product-image flex items-center justify-center p-4 bg-[var(--cream)]">
-                        <div class="w-full h-full relative flex items-center justify-center">
-                             ${getProductIcon(product)}
-                        </div>
+                    <div class="product-image">
+                        ${getProductIcon(product)}
                     </div>
                     <div class="p-6">
                         <span class="text-xs uppercase tracking-wider" style="color: var(--accent);">
@@ -1392,8 +1410,8 @@
                 
                 try {
                     await emailjs.send(
-                        'YOUR_SERVICE_ID', // Remplacez par votre Service ID EmailJS
-                        'YOUR_TEMPLATE_ID', // Remplacez par votre Template ID EmailJS
+                        'YOUR_SERVICE_ID',
+                        'YOUR_TEMPLATE_ID',
                         templateParams
                     );
                     
@@ -1488,4 +1506,3 @@
     </script>
 </body>
 </html>
-
